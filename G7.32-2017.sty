@@ -17,7 +17,7 @@
 \RequirePackage{atveryend}
 \sloppy
 
-\newcounter{IndAppendix} 
+\newcounter{IndAppendix} %Счётчик приложений. Думаю, что желательно его подключить здесь.
 \RequirePackage[tableposition=top]{caption} % Красивая подпись к рисункам и графикам
 \DeclareCaptionLabelFormat{gostfigure}{Рисунок #2}
 \DeclareCaptionLabelFormat{gosttable}{Таблица #2}
@@ -27,6 +27,20 @@
 \captionsetup{labelsep=gost}
 \captionsetup[figure]{labelformat=gostfigure}
 \captionsetup[table]{labelformat=gosttable}
+
+\newcommand{\@maketablecaption}[2]{ % Подпись к таблице --- слева вверху. Спасибо интернет за это.
+\vskip\abovecaptionskip
+\sbox\@tempboxa{#1 --- #2}%
+\ifdim \wd\@tempboxa >\hsize
+#1 --- #2\par
+\else
+\global \@minipagefalse
+\hb@xt@\hsize{\box\@tempboxa}%
+\fi
+\vskip\belowcaptionskip}
+\renewcommand{\table}
+{\let\@makecaption\@maketablecaption\@float{table}}
+
 
 \parindent=1.25cm % Красная строка, абзацный отступ
 \setcounter{secnumdepth}{3} % В оглавление попадают все элементы до subsubsection
