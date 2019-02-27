@@ -26,8 +26,6 @@
 \RequirePackage[tableposition=top]{caption} % Красивая подпись к рисункам и графикам
 \DeclareCaptionLabelFormat{gostfigure}{Рисунок #2}
 \DeclareCaptionLabelFormat{gosttable}{Таблица #2}
-\DeclareCaptionLabelFormat{gostfigure2}{Рисунок #2}
-\DeclareCaptionLabelFormat{gosttable2}{Таблица #2}
 \DeclareCaptionLabelSeparator{gost}{~---~}
 \captionsetup{labelsep=gost}
 \captionsetup[figure]{labelformat=gostfigure}
@@ -48,7 +46,7 @@
 
 
 \parindent=1.25cm % Абзацный отступ
-\setcounter{secnumdepth}{4} % В оглавление попадают все элементы до subsubsection
+\setcounter{secnumdepth}{3} % В оглавление попадают все элементы до subsubsection
 
 \renewcommand\large{\@setfontsize\large{15.5}{17}}
 
@@ -60,7 +58,6 @@
 \renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
 
 % Счётчики общего числа страниц, таблиц, рисунков и источников
-\newcounter{totalpage}
 \newcounter{totaltable} \setcounter{totaltable} {0}
 \newcounter{totalfigure}\setcounter{totalfigure}{0}
 \newcounter{totalappendix}
@@ -206,16 +203,16 @@
 \bfseries\noindent\large ПРИЛОЖЕНИЕ \Asbuk{IndAppendix}
 \end{center}
 \addcontentsline{toc}{section}{Приложение \Asbuk{IndAppendix}}
-\captionsetup[figure]{labelformat=gostfigure2}
-\captionsetup[table]{labelformat=gosttable2}
+%\captionsetup[figure]{labelformat=gostfigure2}
+%\captionsetup[table]{labelformat=gosttable2}
 \addtocounter{totaltable}{\c@table}
 \setcounter{table}{0}
 \addtocounter{totalfigure}{\c@figure}
 \setcounter{figure}{0}
-\setcounter{section}{\c@IndAppendix}
-\renewcommand{\thesection}{\Asbuk{section}}
-\renewcommand{\thefigure}{\thesection.\arabic{figure}}
-\renewcommand{\thetable}{\thesection.\arabic{table}}
+%\setcounter{section}{\c@IndAppendix}
+%\renewcommand{\thesection}{\Asbuk{section}}
+\renewcommand{\thefigure}{\Asbuk{IndAppendix}.\arabic{figure}}
+\renewcommand{\thetable}{\Asbuk{IndAppendix}.\arabic{table}}
 }
 
 \newcommand{\Finish}{
