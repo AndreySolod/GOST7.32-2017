@@ -14,15 +14,20 @@
 \RequirePackage{amsfonts}
 \RequirePackage{amssymb}
 \RequirePackage{tempora}
-\RequirePackage{atveryend}
 \sloppy
+
+\RequirePackage[datesep={.}]{datetime2} %Дата и время
+\DTMsetstyle{ddmmyyyy}
+
+\RequirePackage{setspace}
+\onehalfspacing %Полуторный интервал
 
 \newcounter{IndAppendix} %Счётчик приложений. Думаю, что желательно его подключить здесь.
 \RequirePackage[tableposition=top]{caption} % Красивая подпись к рисункам и графикам
 \DeclareCaptionLabelFormat{gostfigure}{Рисунок #2}
 \DeclareCaptionLabelFormat{gosttable}{Таблица #2}
-\DeclareCaptionLabelFormat{gostfigure2}{Рисунок \Asbuk{IndAppendix}.#2}
-\DeclareCaptionLabelFormat{gosttable2}{Таблица \Asbuk{IndAppendix}.#2}
+\DeclareCaptionLabelFormat{gostfigure2}{Рисунок #2}
+\DeclareCaptionLabelFormat{gosttable2}{Таблица #2}
 \DeclareCaptionLabelSeparator{gost}{~---~}
 \captionsetup{labelsep=gost}
 \captionsetup[figure]{labelformat=gostfigure}
@@ -42,16 +47,15 @@
 {\let\@makecaption\@maketablecaption\@float{table}}
 
 
-\parindent=1.25cm % Красная строка, абзацный отступ
-\setcounter{secnumdepth}{3} % В оглавление попадают все элементы до subsubsection
-\linespread{1.3} % Отступ в 1.5 пункта
+\parindent=1.25cm % Абзацный отступ
+\setcounter{secnumdepth}{4} % В оглавление попадают все элементы до subsubsection
 
 \renewcommand\large{\@setfontsize\large{15.5}{17}}
 
 \RequirePackage{enumitem} % Переопределение обычного enumerate и itemize
 \AddEnumerateCounter{\arabic}{\@arabic}{}
 \setlist{nolistsep}
-\renewcommand{\labelitemi}{---\hspace{1cm}}
+\renewcommand{\labelitemi}{--- }
 \renewcommand{\labelenumi}{\arabic{enumi}.}
 \renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
 
@@ -71,33 +75,22 @@
 \newcommand{\Executors}{% Список исполнителей
 \newpage
 \begin{center}
-\noindent\bfseries СПИСОК ИСПОЛНИТЕЛЕЙ\\
+\noindent\bfseries\large СПИСОК ИСПОЛНИТЕЛЕЙ\\
 \end{center}}
 
 \newcommand{\Repherat}{% Реферат
 \newpage
 \begin{center}
-\noindent\bfseries РЕФЕРАТ\\
+\noindent\bfseries\large РЕФЕРАТ\\
 \end{center}
 
-Отчёт \totalpages{} c, \totalfigures{} рис., \totaltables{} табл., \totalappendix{} примеч.,
+%Отчёт \totalpages{} c, \totalfigures{} рис., \totaltables{} табл., \totalappendix{} примеч.,
 }
-
-\renewcommand\contentsname{СОДЕРЖАНИЕ}% Содержание
-
-\RequirePackage{tocloft}
-\renewcommand{\cfttoctitlefont}{\hspace{0.38\textwidth} \bfseries\MakeUppercase}
-%\renewcommand{\cftbeforetoctitleskip}{-1em}
-\renewcommand{\cftsecfont}{\hspace{0pt}}
-%\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
-\renewcommand{\cftsubsecfont}{\hspace{0em}}
-%\renewcommand{\cftparskip}{-1mm}
-%\renewcommand{\cftdotsep}{1}
 
 \newcommand{\TermAndDefine}{% Термины и определения
 \newpage
 \begin{center}
-\bfseries\noindent ТЕРМИНЫ И ОПРЕДЕЛЕНИЯ\\
+\bfseries\noindent\large ТЕРМИНЫ И ОПРЕДЕЛЕНИЯ\\
 \end{center}
 \addcontentsline{toc}{section}{Термины и определения}
 }
@@ -105,7 +98,7 @@
 \newcommand{\listAbbreviationAndNotation}{% Перечень сокращений и обозначений
 \newpage
 \begin{center}
-\bfseries\noindent ПЕРЕЧЕНЬ СОКРАЩЕНИЙ И ОБОЗНАЧЕНИЙ
+\bfseries\noindent\large ПЕРЕЧЕНЬ СОКРАЩЕНИЙ И ОБОЗНАЧЕНИЙ
 \end{center}
 \addcontentsline{toc}{section}{Перечень сокращений и обозначений}
 }
@@ -113,24 +106,43 @@
 \newcommand{\Intoduction}{% Введение
 \newpage
 \begin{center}
-\noindent\bfseries ВВЕДЕНИЕ
+\noindent\bfseries\large ВВЕДЕНИЕ
 \end{center}
 \addcontentsline{toc}{section}{Введение}
 }
 
 \renewcommand{\section}{\newpage\@startsection{section}{1}% Секция основного текста
-{\parindent}{-3.5ex plus -1ex minus -.2ex}{2.3ex plus.2ex}%
+{\parindent}{-20pt}{1.5ex}%
 {\normalfont\large\bfseries\hyphenpenalty=9999
 }}
 
-\renewcommand{\subsection}{\@startsection{subsection}{2}{2em}% Подсекция основного текста
-{-3.25ex plus-1ex minus-.2ex}{1.5ex plus .2ex}%
+\renewcommand{\subsection}{\@startsection{subsection}{2}{\parindent}% Подсекция основного текста
+{0pt}{1.5ex}%
 {\normalfont\normalsize\bfseries\hyphenpenalty=9999
 }}
 
-\renewcommand{\l@section}{\@dottedtocline{1}{0em}{2.3em}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{\parindent}% Подсекция основного текста
+	{0pt}{1.5ex}%
+	{\normalfont\normalsize\bfseries\hyphenpenalty=9999
+}}
 
-%Перечисления:
+\renewcommand\contentsname{СОДЕРЖАНИЕ}% Содержание
+
+\RequirePackage{tocloft}
+\renewcommand{\cfttoctitlefont}{\hspace{0.38\textwidth} \bfseries\MakeUppercase}
+\renewcommand{\cftbeforetoctitleskip}{-1em}
+\renewcommand{\cftsecfont}{\hspace{0pt}}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
+%\renewcommand{\cftsubsecfont}{\hspace{0em}}
+\renewcommand{\cftparskip}{-1mm}
+\renewcommand{\cftdotsep}{1}
+
+\renewcommand{\l@section}{\@dottedtocline{1}{0em}{1em}}
+
+\renewcommand{\l@subsection}{\@dottedtocline{2}{1em}{1.5em}}
+
+%                  Перечисления:
 
 \newenvironment{GostItemize}{%Через тире
 \renewcommand{\item}{\par
@@ -175,7 +187,7 @@
 \newcommand{\Conclusion}{%Заключение
 \newpage
 \begin{center}
-\bfseries\noindent ЗАКЛЮЧЕНИЕ\\
+\bfseries\noindent\large ЗАКЛЮЧЕНИЕ\\
 \end{center}
 \addcontentsline{toc}{section}{Заключение}
 }
@@ -183,7 +195,7 @@
 \newcommand{\ListSource}{%Список использованных источников
 \newpage
 \begin{center}
-\bfseries\noindent СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ
+\bfseries\noindent\large СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ
 \end{center}
 \addcontentsline{toc}{section}{Список использованных источников}
 }
@@ -191,7 +203,7 @@
 \newcommand{\Appendix}{%% Приложение
 \newpage\refstepcounter{IndAppendix}
 \begin{center}
-\bfseries\noindent ПРИЛОЖЕНИЕ \Asbuk{IndAppendix}
+\bfseries\noindent\large ПРИЛОЖЕНИЕ \Asbuk{IndAppendix}
 \end{center}
 \addcontentsline{toc}{section}{Приложение \Asbuk{IndAppendix}}
 \captionsetup[figure]{labelformat=gostfigure2}
@@ -200,6 +212,10 @@
 \setcounter{table}{0}
 \addtocounter{totalfigure}{\c@figure}
 \setcounter{figure}{0}
+\setcounter{section}{\c@IndAppendix}
+\renewcommand{\thesection}{\Asbuk{section}}
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+\renewcommand{\thetable}{\thesection.\arabic{table}}
 }
 
 \newcommand{\Finish}{
@@ -212,12 +228,3 @@
 \refstepcounter{totaltable}\label{reftotaltables}}
 \addtocounter{totalappendix}{\c@IndAppendix}\label{reftotalappendix}
 }
-
-%\addtocounter{page}{-1}
-%\refstepcounter{page} \label{reftotalpages}
-%\addtocounter{table}{-1}
-%\refstepcounter{table} \label{reftotaltables}
-%\addtocounter{figure}{-1}
-%\refstepcounter{figure} \label{reftotalfigures}
-%\addtocounter{IndAppendix}
-%\refstepcounter{IndAppendix}\label{reftotalappendix}
