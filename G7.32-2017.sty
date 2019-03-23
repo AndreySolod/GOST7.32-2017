@@ -14,6 +14,7 @@
 \RequirePackage{amsfonts}
 \RequirePackage{amssymb}
 \RequirePackage{tempora}
+\RequirePackage{wrapfig}
 \sloppy
 
 \RequirePackage[datesep={.}]{datetime2} %Дата и время
@@ -21,6 +22,8 @@
 
 \RequirePackage{setspace}
 \onehalfspacing %Полуторный интервал
+
+\newcommand{\RNumb}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
 
 \newcounter{IndAppendix} %Счётчик приложений. Думаю, что желательно его подключить здесь.
 \RequirePackage[tableposition=top]{caption} % Красивая подпись к рисункам и графикам
@@ -90,6 +93,13 @@
 \bfseries\noindent\large ТЕРМИНЫ И ОПРЕДЕЛЕНИЯ\\
 \end{center}
 \addcontentsline{toc}{section}{Термины и определения}
+}
+
+\newcommand{\IndividualTask}{% Термины и определения
+\newpage
+\begin{center}
+\bfseries\noindent\large ИНДИВИДУАЛЬНОЕ ЗАДАНИЕ\\
+\end{center}
 }
 
 \newcommand{\listAbbreviationAndNotation}{% Перечень сокращений и обозначений
